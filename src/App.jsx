@@ -1,27 +1,35 @@
-import './App.css';
+import React, { useState } from "react";
+import "./styles.css";
+import SearchForm from "./SearchForm";
+import WeatherDisplay from "./WeatherDisplay";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+  const [weatherData, setWeatherData] = useState([]);
+
+  const handleSubmit = async (query) => {
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=25324be609828c6f9afbdcede01115a5&units=metric`
+      );
+      const data = await response.json();
+      const weather = {
+        city: data.name,
+        temp: data.main.temp,
+        humidity: data.main.humidity,
+        description: data.weather[0].description,
+      };
+      setWeatherData([weather]);
+    } catch (error) {
+      console.error("Error fetching weather data: ", error);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src="Octocat.png" className="App-logo" alt="logo" />
-        <p>
-          GitHub Codespaces <span className="heart">♥️</span> React
-        </p>
-        <p className="small">
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
+      <h1>Weather Search</h1>
+      <SearchForm onSubmit={handleSubmit} />
+      <WeatherDisplay weatherData={weatherData} />
     </div>
   );
 }
