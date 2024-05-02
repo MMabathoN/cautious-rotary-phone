@@ -1,10 +1,9 @@
-// rollup.config.js
-export default {
-    input: 'src/index.js',
-    output: {
-      file: 'dist/bundle.js',
-      format: 'cjs'
-    },
-    external: ['react', 'react-dom'], 
-  };
-  
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      external: ['bootstrap/dist/css/bootstrap.min.css']
+    }
+  }
+});
