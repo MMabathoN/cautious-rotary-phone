@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./styles.css";
 import SearchForm from "./SearchForm";
 import WeatherDisplay from "./WeatherDisplay";
+import  WeatherCard from "./WeatherCard";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
