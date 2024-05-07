@@ -30,6 +30,7 @@ function App() {
       <h1>Weather Search</h1>
       <SearchForm onSubmit={handleSubmit} />
       <WeatherDisplay weatherData={weatherData} />
+      {weatherData.length > 0 && <WeatherCard weather={weatherData[0]} />}
     </div>
   );
 }
